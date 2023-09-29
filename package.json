@@ -17,5 +17,8 @@
   "workspaces": [
     "client",
     "server"
-  ]
+  ],
+  "dependencies": {
+    "reconnecting-websocket": "^4.4.0"
+  }
 }
