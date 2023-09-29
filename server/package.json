@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "python watch.py",
-    "start": "python watch.py"
+    "dev": "python reloadable.py main.py",
+    "start": "python reloadable.py main.py"
   }
 }
