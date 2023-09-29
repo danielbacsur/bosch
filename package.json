@@ -12,7 +12,7 @@
     "turbo": "latest"
   },
   "workspaces": [
-    "client/*",
-    "server/*"
+    "client",
+    "server"
   ]
 }
