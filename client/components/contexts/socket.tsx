@@ -15,6 +15,7 @@ import {
   useState,
   useMemo,
 } from "react";
+import { defaultResponse } from "@/lib/helpers/socket";
 
 export const SocketContext = createContext<SocketContextType | null>(null);
 export const useSocket = () => useContext(SocketContext);
@@ -34,7 +35,7 @@ export const SocketProvider = ({ children }: { children: ReactNode }) => {
   const request = useMemo(() => ({ type, timestamp }), [type, timestamp]);
 
   // WebSocket response
-  const [response, setResponse] = useState<ResponseType | null>(null);
+  const [response, setResponse] = useState<ResponseType>(defaultResponse);
 
   // Connect to WebSocket server
   const [socket, setSocket] = useState<ReconnectingWebSocket | null>(null);
