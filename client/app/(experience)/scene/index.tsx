@@ -51,13 +51,15 @@ const Vehicle = () => {
 
   return (
     socket && (
-      <Center top rotation={[0, socket.response.vehicle.yaw, 0]}>
-        <Porsche />
+      <>
+        <Center top rotation={[0, socket.response.vehicle.yaw, 0]}>
+          <Porsche />
+        </Center>
         <arrowHelper
-          position={[0, 0.63, 0]}
+          position={[0, 1.26, 0]}
           scale={socket.response?.vehicle.speed}
         />
-      </Center>
+      </>
     )
   );
 };
