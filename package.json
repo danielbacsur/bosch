@@ -1,18 +1,21 @@
 {
-  "name": "bosch",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "turbo run dev",
-    "build": "turbo run build",
-    "start": "turbo run start",
-    "lint": "turbo run lint"
-  },
-  "devDependencies": {
-    "turbo": "latest"
-  },
-  "workspaces": [
-    "client",
-    "server"
-  ]
+    "name": "bosch",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "turbo run dev",
+        "build": "turbo run build",
+        "start": "turbo run start",
+        "lint": "turbo run lint",
+        "format": "prettier \"**/*.{css,js,json,jsx,ts,tsx}\"",
+        "format:write": "prettier --write \"**/*.{css,js,json,jsx,ts,tsx}\""
+    },
+    "devDependencies": {
+        "prettier": "latest",
+        "turbo": "latest"
+    },
+    "workspaces": [
+        "client",
+        "server"
+    ]
 }
