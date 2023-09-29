@@ -14,16 +14,19 @@ for index, row in df.iterrows():
     timestamp = row["Timestamp"]
     structured[timestamp] = {
         "timestamp": row["Timestamp"],
-        "vehicle": {"yaw": row["YawRate"], "speed": row["VehicleSpeed"]},
+        "vehicle": {
+            "yawRate": row["YawRate"],
+            "speed": float(row["VehicleSpeed"]) / 256,
+        },
         "objects": [
             {
                 "distance": {
-                    "x": row[f"{name}ObjectDistance_X"],
-                    "y": row[f"{name}ObjectDistance_Y"],
+                    "x": float(row[f"{name}ObjectDistance_X"]) / 128,
+                    "y": float(row[f"{name}ObjectDistance_Y"]) / 128,
                 },
                 "speed": {
-                    "x": row[f"{name}ObjectSpeed_X"],
-                    "y": row[f"{name}ObjectSpeed_Y"],
+                    "x": float(row[f"{name}ObjectSpeed_X"]) / 256,
+                    "y": float(row[f"{name}ObjectSpeed_Y"]) / 256,
                 },
             }
             for name in ["First", "Second", "Third", "Fourth"]
@@ -43,10 +46,36 @@ print("deltat", deltat)
 #########################################################################
 
 
+def search(slider_val):
+    closest_key = min(structured.keys(), key=lambda k: abs(k - slider_val))
+    return structured[closest_key]
+
+
 # Main callback for WebSocket connection
 async def main(websocket, path):
     async for message in websocket:
-        pass
+        request = json.loads(message)
+
+        request_type = str(request["type"])
+
+        if request_type == "connection":
+            response = {
+                "type": "connection",
+                "data": {
+                    "minkey": minkey,
+                    "maxkey": maxkey,
+                    "length": length,
+                    "deltat": deltat,
+                },
+            }
+            await websocket.send(json.dumps(response))
+        elif request_type == "data":
+            request_timestamp = float(request["timestamp"])
+            response = {
+                "type": "data",
+                "data": search(request_timestamp),
+            }
+            await websocket.send(json.dumps(response))
 
 
 # Start WebSocket server
