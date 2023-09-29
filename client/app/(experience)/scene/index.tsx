@@ -52,7 +52,7 @@ const Vehicle = () => {
   return (
     socket && (
       <>
-        <Center top rotation={[0, socket.response.vehicle.yaw, 0]}>
+        <Center top>
           <Porsche />
         </Center>
         <arrowHelper
@@ -125,5 +125,13 @@ const Object = ({ object }: { object: ObjectData }) => {
 };
 
 const Transformer = () => {
-  return <Grid args={[20, 20]} />;
+  const socket = useSocket();
+
+  return (
+    socket && (
+      <group rotation={[0, socket.response.vehicle.yaw, 0]}>
+        <Grid args={[20, 20]} />;
+      </group>
+    )
+  );
 };
