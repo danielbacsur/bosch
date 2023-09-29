@@ -6,7 +6,7 @@ export default function Interface() {
   const socket = useSocket();
 
   return (
-    <div className="w-full absolute bottom-0 grid place-items-center z-10">
+    <div className="absolute bottom-[8vh] left-1/2 -translate-x-1/2 z-10">
       <div className="flex space-x-4">
         <div>{socket?.connection.minkey}</div>
         <input
