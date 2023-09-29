@@ -2,62 +2,24 @@
 
 import ReconnectingWebSocket from "reconnecting-websocket";
 import {
+  SocketContextType,
+  ConnectionType,
+  ResponseType,
+  RequestType,
+} from "@/lib/types";
+import {
   createContext,
   useContext,
   ReactNode,
-  useMemo,
-  useState,
   useEffect,
+  useState,
+  useMemo,
 } from "react";
-
-interface SocketContextType {
-  socket: ReconnectingWebSocket;
-  connection: ConnectionType;
-  request: RequestModifierType;
-  response: ResponseType | null;
-}
-
-interface RequestType {
-  type: "connection" | "data";
-}
-
-interface ResponseType {
-  timestamp: number;
-  vehicle: Vehicle;
-  objects: ObjectData[];
-}
-
-interface Vehicle {
-  yaw: number;
-  speed: number;
-}
-
-interface ObjectData {
-  distance: Vector2D;
-  speed: Vector2D;
-}
-
-interface Vector2D {
-  x: number;
-  y: number;
-}
-
-interface RequestModifierType extends RequestType {
-  timestamp: number;
-  setTimestamp: (timestamp: number) => void;
-}
-
-interface ConnectionType {
-  minkey: number;
-  maxkey: number;
-  length: number;
-  deltat: number;
-}
 
 export const SocketContext = createContext<SocketContextType | null>(null);
 export const useSocket = () => useContext(SocketContext);
 
-const SocketProvider = ({ children }: { children: ReactNode }) => {
+export const SocketProvider = ({ children }: { children: ReactNode }) => {
   // WebSocket request hooks
   const [type, setType] = useState<"connection" | "data">("data");
   const [timestamp, setTimestamp] = useState<number>(0);
@@ -75,7 +37,9 @@ const SocketProvider = ({ children }: { children: ReactNode }) => {
   const [response, setResponse] = useState<ResponseType | null>(null);
 
   // Connect to WebSocket server
-  const socket = useMemo(() => {
+  const [socket, setSocket] = useState<ReconnectingWebSocket | null>(null);
+
+  useEffect(() => {
     const webSocket = new ReconnectingWebSocket("ws://localhost:8765");
 
     webSocket.onopen = () => {
@@ -93,13 +57,23 @@ const SocketProvider = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    return webSocket;
+    setSocket(webSocket);
+
+    return () => {
+      if (webSocket) {
+        webSocket.close();
+      }
+    };
   }, []);
 
   // Send request if request is updated
   useEffect(() => {
     socket && socket.send(JSON.stringify(request));
   }, [socket, request]);
+
+  useEffect(() => {
+    response && timestamp === 0 && setTimestamp(response.timestamp);
+  }, [socket, response]);
 
   return (
     <SocketContext.Provider
@@ -118,8 +92,6 @@ const SocketProvider = ({ children }: { children: ReactNode }) => {
     </SocketContext.Provider>
   );
 };
-
-export default SocketProvider;
 
 const connectionRequest = JSON.stringify({
   type: "connection",
