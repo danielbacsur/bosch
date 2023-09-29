@@ -15,7 +15,7 @@ for index, row in df.iterrows():
     structured[timestamp] = {
         "timestamp": row["Timestamp"],
         "vehicle": {
-            "yawRate": row["YawRate"],
+            "yaw": row["YawRate"],
             "speed": float(row["VehicleSpeed"]) / 256,
         },
         "objects": [
