@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
 import "@/styles/globals.css";
-import SocketProvider from "@/components/contexts/socket";
+import { SocketProvider } from "@/components/contexts/socket";
 
 const inter = Inter({ subsets: ["latin"] });
 
