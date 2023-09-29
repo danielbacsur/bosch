@@ -1,19 +1,9 @@
 "use client";
 
 import { useSocket } from "@/components/contexts/socket";
-import { useEffect } from "react";
 
 export default function Interface() {
   const socket = useSocket();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      socket?.request.setTimestamp((prevCount: number) => prevCount + 0.01);
-    }, 10);
-
-    // Clear the interval when the component is unmounted
-    return () => clearInterval(interval);
-  }, []);  
 
   return (
     <div className="w-full absolute bottom-0 grid place-items-center z-10">
