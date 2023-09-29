@@ -1,4 +1,7 @@
 import pandas as pd
+import websockets
+import asyncio
+import json
 
 
 # Read the CSV file considering the first column as the index
@@ -35,3 +38,18 @@ deltat = maxkey - minkey
 
 print("length", length)
 print("deltat", deltat)
+
+
+#########################################################################
+
+
+# Main callback for WebSocket connection
+async def main(websocket, path):
+    async for message in websocket:
+        pass
+
+
+# Start WebSocket server
+server = websockets.serve(main, "localhost", 8765)
+asyncio.get_event_loop().run_until_complete(server)
+asyncio.get_event_loop().run_forever()
