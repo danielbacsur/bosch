@@ -21,12 +21,12 @@ for index, row in df.iterrows():
         "objects": [
             {
                 "distance": {
-                    "x": float(row[f"{name}ObjectDistance_X"]) / 128,
-                    "y": float(row[f"{name}ObjectDistance_Y"]) / 128,
+                    "x": float(row[f"{name}ObjectDistance_Y"]) / 128,
+                    "y": float(row[f"{name}ObjectDistance_X"]) / 128,
                 },
                 "speed": {
-                    "x": float(row[f"{name}ObjectSpeed_X"]) / 256,
-                    "y": float(row[f"{name}ObjectSpeed_Y"]) / 256,
+                    "x": float(row[f"{name}ObjectSpeed_Y"]) / 256,
+                    "y": float(row[f"{name}ObjectSpeed_X"]) / 256,
                 },
             }
             for name in ["First", "Second", "Third", "Fourth"]
@@ -39,13 +39,8 @@ maxkey = max(structured.keys())
 length = len(structured)
 deltat = maxkey - minkey
 
-print("length", length)
-print("deltat", deltat)
 
-
-#########################################################################
-
-
+# Return the value that corresponds to the closest key to the slider's value
 def search(slider_val):
     closest_key = min(structured.keys(), key=lambda k: abs(k - slider_val))
     return structured[closest_key]
