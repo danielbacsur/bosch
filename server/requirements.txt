@@ -1,4 +1,1 @@
-websockets
-asyncio
 pandas
-json
