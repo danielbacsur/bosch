@@ -4,7 +4,7 @@ export interface SocketContextType {
   socket: ReconnectingWebSocket | null;
   connection: ConnectionType;
   request: RequestModifierType;
-  response: ResponseType | null;
+  response: ResponseType;
 }
 
 export interface RequestType {
