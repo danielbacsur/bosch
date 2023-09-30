@@ -80,7 +80,7 @@ const Socket = () => {
           <>
             <br />
             <br />
-            speed: {socket?.response.vehicle.speed} m/s
+            speed: {socket?.response.vehicle.speed.toFixed(2)} m/s
             <br />
             <br />
             yaw: {socket?.response.vehicle.yaw.toFixed(4)} rad
@@ -89,8 +89,8 @@ const Socket = () => {
             rotation: {socket?.response.vehicle.rotation.toFixed(4)} rad
             <br />
             <br />
-            position: {socket?.response.vehicle.position.x.toFixed(2)},{" "}
-            {socket?.response.vehicle.position.y.toFixed(2)} m
+            position: [{socket?.response.vehicle.position.x.toFixed(2)},{" "}
+            {socket?.response.vehicle.position.y.toFixed(2)}] m
             <br />
             <br />
             danger zone:{" "}
