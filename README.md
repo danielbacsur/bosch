@@ -10,7 +10,8 @@ Your task for the upcoming 24 hours will include implementing a solution for veh
 
 ## How It Works 🚀
 
-1. **Clone the Repository**: Start by cloning the Triolapse repository.
+1. **Data processing**: The python backend server reads and processes the csv data
+2. 
 ```json
 {
   "33.24150366": {
@@ -61,7 +62,7 @@ useEffect(() => {
 
 ## Run It Yourself 🏃‍♂️
 
-1. **Clone the Repository**: Start by cloning the Triolapse repository. To run it locally, you will need `node` and `python`
+1. **Clone the Repository**: Start by cloning the repository. To run it locally, you will need `node` and `python`
 ```bash
 git clone https://github.com/danielbacsur/bosch
 cd bosch
