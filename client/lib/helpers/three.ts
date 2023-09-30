@@ -1,5 +1,5 @@
+import { ObjectData, SocketContextType } from "@/lib/types";
 import { Vector3 } from "three";
-import { ObjectData, SocketContextType } from "../types";
 
 export function distanceVector(v1: Vector3, v2: Vector3) {
   var dx = v1.x - v2.x;
