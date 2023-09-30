@@ -1,5 +1,6 @@
 "use client";
 
+import { BreakContextType, Collision } from "@/lib/types";
 import { validate } from "@/lib/helpers/three";
 import { useSocket } from "./socket";
 import {
@@ -9,18 +10,6 @@ import {
   useEffect,
   useMemo,
 } from "react";
-
-interface BreakContextType {
-  collision: Collision;
-}
-
-enum Collision {
-  NONE = 0,
-  CPNCO,
-  CPTA,
-  CPLA,
-  ERROR = 9,
-}
 
 export const BreakContext = createContext<BreakContextType | null>(null);
 export const useBreak = () => useContext(BreakContext);

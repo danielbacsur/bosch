@@ -45,3 +45,17 @@ export interface ConnectionType {
   length: number;
   deltat: number;
 }
+
+///////////////////////////////////////////////////////////////////
+
+export interface BreakContextType {
+  collision: Collision;
+}
+
+export enum Collision {
+  NONE = 0,
+  CPNCO,
+  CPTA,
+  CPLA,
+  ERROR = 9,
+}
