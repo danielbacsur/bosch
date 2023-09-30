@@ -13,6 +13,7 @@ export interface RequestType {
 
 export interface ResponseType {
   timestamp: number;
+  deltatime: number;
   vehicle: Vehicle;
   objects: ObjectData[];
 }
@@ -20,6 +21,7 @@ export interface ResponseType {
 export interface Vehicle {
   yaw: number;
   speed: number;
+  rotation: number;
 }
 
 export interface ObjectData {

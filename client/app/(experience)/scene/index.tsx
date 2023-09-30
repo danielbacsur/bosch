@@ -118,7 +118,9 @@ const Object = ({ object }: { object: ObjectData }) => {
         args={[0.5, 16, 16]}
         position={[object.distance.x, 0, object.distance.y]}
       >
-        <meshBasicMaterial color={object.distance.x && object.distance.y ? "black" : "red"} />
+        <meshBasicMaterial
+          color={object.distance.x && object.distance.y ? "black" : "red"}
+        />
       </Sphere>
     </>
   );
@@ -129,7 +131,7 @@ const Transformer = () => {
 
   return (
     socket && (
-      <group rotation={[0, -socket.response.vehicle.yaw, 0]}>
+      <group rotation={[0, -socket.response.vehicle.rotation, 0]}>
         <Grid args={[20, 20]} />;
       </group>
     )
