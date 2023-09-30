@@ -63,7 +63,7 @@ useEffect(() => {
 
 1. **Clone the Repository**: Start by cloning the repository. To run it locally, you will need `node` and `python`.
 ```bash
-git clone https://github.com/danielbacsur/bosch
+git clone https://github.com/danielbacsur/bosch.git
 cd bosch
 ```
 2. **Run the Program**: Install dependencies and start the dev server.
