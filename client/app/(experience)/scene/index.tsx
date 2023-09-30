@@ -2,7 +2,6 @@
 
 import { useSocket } from "@/components/contexts/socket";
 import { Canvas } from "@react-three/fiber";
-import { ObjectData, SocketContextType } from "@/lib/types";
 import { validate } from "@/lib/helpers/three";
 import Porsche from "./porsche";
 import {
@@ -15,20 +14,62 @@ import {
   Line,
   Grid,
 } from "@react-three/drei";
+import { Fragment } from "react";
 
 export default function Scene() {
   return (
     <Canvas shadows camera={{ position: [-8, 8, -12], fov: 30 }}>
-      <Lights />
+      <Relative />
+      <Absolute />
+    </Canvas>
+  );
+}
+
+const Relative = () => {
+  return (
+    <>
       <Vehicle />
       <Shadows />
       <Background />
       <Camera />
       <Objects />
-      <Transformer />
-    </Canvas>
+    </>
   );
-}
+};
+
+const Absolute = () => {
+  const socket = useSocket();
+
+  return (
+    socket && (
+      <group rotation={[0, -socket.response.vehicle.rotation, 0]}>
+        <group
+          position={[
+            -socket.response.vehicle.position.x,
+            0,
+            -socket.response.vehicle.position.y,
+          ]}
+        >
+          <Lights />
+       
+      <Grid
+        position={[0, -0.01, 0]}
+        args={[10.5, 10.5]}
+        cellSize={0.25}
+        cellThickness={0.25}
+        cellColor={"#6f6f6f"}
+        sectionSize={1}
+        sectionThickness={0.8}
+        sectionColor={"#9d4b4b"}
+        fadeDistance={25}
+        fadeStrength={1}
+        infiniteGrid={true}
+      />
+         </group>
+      </group>
+    )
+  );
+};
 
 const Lights = () => {
   return (
@@ -47,20 +88,10 @@ const Lights = () => {
 };
 
 const Vehicle = () => {
-  const socket = useSocket();
-
   return (
-    socket && (
-      <>
-        <Center top>
-          <Porsche />
-        </Center>
-        <arrowHelper
-          position={[0, 1.26, 0]}
-          scale={socket.response.vehicle.speed}
-        />
-      </>
-    )
+    <Center top>
+      <Porsche />
+    </Center>
   );
 };
 
@@ -96,39 +127,28 @@ const Camera = () => {
 const Objects = () => {
   const socket = useSocket();
 
-  return (
-    socket &&
-    socket.response.objects.map((object, index) => {
-      return <Object key={index} socket={socket} object={object} />;
-    })
-  );
-};
-
-const Object = ({
-  socket,
-  object,
-}: {
-  socket: SocketContextType;
-  object: ObjectData;
-}) => {
-  return (
-    <>
-      <Line
-        points={[
-          [0, 0, 0],
-          [object.distance.x, 0, object.distance.y],
-        ]}
-        lineWidth={1}
-        color={validate(socket, object) ? "red" : "black"}
-      />
-      <Sphere
-        args={[0.5, 16, 16]}
-        position={[object.distance.x, 0, object.distance.y]}
-      >
-        <meshBasicMaterial color={validate(socket, object) ? "red" : "black"} />
-      </Sphere>
-    </>
-  );
+  return socket?.response.objects.map((object, index) => {
+    return (
+      <Fragment key={index}>
+        <Line
+          points={[
+            [0, 0, 0],
+            [object.distance.x, 0, object.distance.y],
+          ]}
+          lineWidth={1}
+          color={validate(socket, object) ? "red" : "black"}
+        />
+        <Sphere
+          args={[0.5, 16, 16]}
+          position={[object.distance.x, 0, object.distance.y]}
+        >
+          <meshBasicMaterial
+            color={validate(socket, object) ? "red" : "black"}
+          />
+        </Sphere>
+      </Fragment>
+    );
+  });
 };
 
 const Transformer = () => {
@@ -137,7 +157,13 @@ const Transformer = () => {
   return (
     socket && (
       <group rotation={[0, -socket.response.vehicle.rotation, 0]}>
-        <Grid args={[20, 20]} />;
+        <group
+          position={[
+            -socket.response.vehicle.position.x,
+            0,
+            -socket.response.vehicle.position.y,
+          ]}
+        ></group>
       </group>
     )
   );
