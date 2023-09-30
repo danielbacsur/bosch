@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import websockets
 import asyncio
 import json
@@ -34,14 +33,11 @@ for index, row in df.iterrows():
         ],
     }
 
-def toRad(degrees):
-    return degrees * np.pi / 180
-
-
 sorted = sorted(structured.keys())
 previous = sorted[0]
 totalRotation = 0
 
+# Calculate additive variables
 for current in sorted:
     deltatime = current - previous
     structured[current]["deltatime"] = deltatime
@@ -50,6 +46,7 @@ for current in sorted:
     structured[current]["vehicle"]["rotation"] = totalRotation
 
     previous = current
+
 
 # Calculate the delta time of the database, and get some helper variables
 minkey = min(structured.keys())
