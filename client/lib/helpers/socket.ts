@@ -5,6 +5,10 @@ export const defaultResponse = {
     yaw: 0.0,
     speed: 0.0,
     rotation: 0.0,
+    position: {
+      x: 0.0,
+      y: 0.0,
+    },
   },
   objects: [
     {
