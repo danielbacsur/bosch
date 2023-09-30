@@ -1,7 +1,6 @@
 "use client";
 
 import { useSocket } from "@/components/contexts/socket";
-import { calculateBreakDistance } from "@/lib/utils";
 
 export default function Interface() {
   const socket = useSocket();
@@ -25,8 +24,6 @@ export default function Interface() {
           <div>{socket.connection.maxkey}</div>
         </div>
         <div>{socket.request.timestamp}</div>
-        <div>{socket.response.vehicle.speed * 3.6}</div>
-        <div>{calculateBreakDistance(socket.response.vehicle.speed)}</div>
       </div>
     )
   );
