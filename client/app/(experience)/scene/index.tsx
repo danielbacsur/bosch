@@ -22,7 +22,6 @@ export default function Scene() {
       <Vehicle />
       <Shadows />
       <Background />
-
       <Camera />
       <Objects />
       <Transformer />
