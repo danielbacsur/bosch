@@ -47,14 +47,15 @@ for current in sorted:
     structured[current]["vehicle"]["position"] = {}
 
 
-    totalX += deltatime * structured[current]["vehicle"]["speed"] * math.sin(structured[current]["vehicle"]["yaw"])
-    structured[current]["vehicle"]["position"]["x"] = totalX
-
-    totalY += deltatime * structured[current]["vehicle"]["speed"] * math.cos(structured[current]["vehicle"]["yaw"])
-    structured[current]["vehicle"]["position"]["y"] = totalY
 
     totalRotation += deltatime * structured[current]["vehicle"]["yaw"]
     structured[current]["vehicle"]["rotation"] = totalRotation
+
+    totalX += deltatime * structured[current]["vehicle"]["speed"] * math.sin(totalRotation)
+    structured[current]["vehicle"]["position"]["x"] = totalX
+
+    totalY += deltatime * structured[current]["vehicle"]["speed"] * math.cos(totalRotation)
+    structured[current]["vehicle"]["position"]["y"] = totalY
 
     previous = current
 
