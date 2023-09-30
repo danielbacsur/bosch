@@ -2,7 +2,7 @@
 
 import { useSocket } from "@/components/contexts/socket";
 import { Canvas } from "@react-three/fiber";
-import { ObjectData } from "@/lib/types";
+import { ObjectData, SocketContextType } from "@/lib/types";
 import Porsche from "./porsche";
 import {
   AccumulativeShadows,
@@ -14,6 +14,10 @@ import {
   Line,
   Grid,
 } from "@react-three/drei";
+import { useMemo } from "react";
+import { distanceVector, validate } from "@/lib/helpers/three";
+import { Vector3 } from "three";
+import { getBreakDistance } from "@/lib/utils";
 
 export default function Scene() {
   return (
@@ -98,12 +102,12 @@ const Objects = () => {
   return (
     socket &&
     socket.response.objects.map((object, index) => {
-      return <Object key={index} object={object} />;
+      return <Object key={index} socket={socket} object={object} />;
     })
   );
 };
 
-const Object = ({ object }: { object: ObjectData }) => {
+const Object = ({ socket, object }: { socket:SocketContextType, object: ObjectData }) => {
   return (
     <>
       <Line
@@ -112,14 +116,13 @@ const Object = ({ object }: { object: ObjectData }) => {
           [object.distance.x, 0, object.distance.y],
         ]}
         lineWidth={1}
+        color={validate(socket, object) ? "red" : "black"}
       />
       <Sphere
         args={[0.5, 16, 16]}
         position={[object.distance.x, 0, object.distance.y]}
       >
-        <meshBasicMaterial
-          color={object.distance.x && object.distance.y ? "black" : "red"}
-        />
+        <meshBasicMaterial color={validate(socket, object) ? "red" : "black"} />
       </Sphere>
     </>
   );
