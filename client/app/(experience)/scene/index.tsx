@@ -57,7 +57,7 @@ const Vehicle = () => {
         </Center>
         <arrowHelper
           position={[0, 1.26, 0]}
-          scale={socket.response?.vehicle.speed}
+          scale={socket.response.vehicle.speed}
         />
       </>
     )
