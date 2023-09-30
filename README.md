@@ -1,10 +1,10 @@
-# Odyssey - Code Like A Bosch 🧑‍💻
+# Odyssey 🚗
 
 <br/>
 
 ## The Challange 🎯
 
-Your task for the upcoming 24 hours will include implementing a solution for vehicle collision avoidance as well thinking like an innovator and delivering the next generation of driver assistance systems. Join us on this exciting challenge!
+Your task for the upcoming 24 hours will include implementing a solution for vehicle collision avoidance as well thinking like an innovator and delivering the next generation of driver assistance systems. 🧠
 
 <br/>
 
