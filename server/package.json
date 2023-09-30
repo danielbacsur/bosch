@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pip install -r requirements.txt && python3 reloadable.py main.py",
-    "start": "pip install -r requirements.txt && python3 reloadable.py main.py"
+    "dev": "pip install -r requirements.txt && python reloadable.py main.py",
+    "start": "pip install -r requirements.txt && python reloadable.py main.py"
   }
 }
