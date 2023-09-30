@@ -1,6 +1,7 @@
 "use client";
 
 import ReconnectingWebSocket from "reconnecting-websocket";
+import { defaultResponse } from "@/lib/helpers/socket";
 import {
   SocketContextType,
   ConnectionType,
@@ -15,7 +16,6 @@ import {
   useState,
   useMemo,
 } from "react";
-import { defaultResponse } from "@/lib/helpers/socket";
 
 export const SocketContext = createContext<SocketContextType | null>(null);
 export const useSocket = () => useContext(SocketContext);
