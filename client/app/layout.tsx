@@ -1,8 +1,9 @@
+import { SocketProvider } from "@/components/contexts/socket";
+import { BreakProvider } from "@/components/contexts/break";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
 import "@/styles/globals.css";
-import { SocketProvider } from "@/components/contexts/socket";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +16,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <SocketProvider>{children}</SocketProvider>
+        <SocketProvider>
+          <BreakProvider>{children}</BreakProvider>
+        </SocketProvider>
       </body>
     </html>
   );
