@@ -2,6 +2,7 @@ import pandas as pd
 import websockets
 import asyncio
 import json
+import math
 
 
 # Read the CSV file considering the first column as the index
@@ -36,17 +37,28 @@ for index, row in df.iterrows():
 sorted = sorted(structured.keys())
 previous = sorted[0]
 totalRotation = 0
+totalX, totalY = 0, 0
 
 # Calculate additive variables
 for current in sorted:
     deltatime = current - previous
     structured[current]["deltatime"] = deltatime
 
+    structured[current]["vehicle"]["position"] = {}
+
+
+    totalX += deltatime * structured[current]["vehicle"]["speed"] * math.sin(structured[current]["vehicle"]["yaw"])
+    structured[current]["vehicle"]["position"]["x"] = totalX
+
+    totalY += deltatime * structured[current]["vehicle"]["speed"] * math.cos(structured[current]["vehicle"]["yaw"])
+    structured[current]["vehicle"]["position"]["y"] = totalY
+
     totalRotation += deltatime * structured[current]["vehicle"]["yaw"]
     structured[current]["vehicle"]["rotation"] = totalRotation
 
     previous = current
 
+print(structured)
 
 # Calculate the delta time of the database, and get some helper variables
 minkey = min(structured.keys())
