@@ -14,10 +14,7 @@ import {
   Line,
   Grid,
 } from "@react-three/drei";
-import { useMemo } from "react";
-import { distanceVector, validate } from "@/lib/helpers/three";
-import { Vector3 } from "three";
-import { getBreakDistance } from "@/lib/utils";
+import { validate } from "@/lib/helpers/three";
 
 export default function Scene() {
   return (
