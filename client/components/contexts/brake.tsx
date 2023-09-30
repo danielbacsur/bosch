@@ -1,6 +1,6 @@
 "use client";
 
-import { BreakContextType, Collision } from "@/lib/types";
+import { BrakeContextType, Collision } from "@/lib/types";
 import { validate } from "@/lib/helpers/three";
 import { useSocket } from "./socket";
 import {
@@ -11,10 +11,10 @@ import {
   useMemo,
 } from "react";
 
-export const BreakContext = createContext<BreakContextType | null>(null);
-export const useBreak = () => useContext(BreakContext);
+export const BrakeContext = createContext<BrakeContextType | null>(null);
+export const useBrake = () => useContext(BrakeContext);
 
-export const BreakProvider = ({ children }: { children: ReactNode }) => {
+export const BrakeProvider = ({ children }: { children: ReactNode }) => {
   const socket = useSocket();
 
   const collision = useMemo(() => {
@@ -65,8 +65,8 @@ export const BreakProvider = ({ children }: { children: ReactNode }) => {
   }, [collision]);
 
   return (
-    <BreakContext.Provider value={{ collision }}>
+    <BrakeContext.Provider value={{ collision }}>
       {children}
-    </BreakContext.Provider>
+    </BrakeContext.Provider>
   );
 };

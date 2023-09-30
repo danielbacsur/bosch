@@ -1,5 +1,5 @@
 import { SocketProvider } from "@/components/contexts/socket";
-import { BreakProvider } from "@/components/contexts/break";
+import { BrakeProvider } from "@/components/contexts/brake";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <SocketProvider>
-          <BreakProvider>{children}</BreakProvider>
+          <BrakeProvider>{children}</BrakeProvider>
         </SocketProvider>
       </body>
     </html>

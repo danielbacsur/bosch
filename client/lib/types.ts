@@ -48,14 +48,14 @@ export interface ConnectionType {
 
 ///////////////////////////////////////////////////////////////////
 
-export interface BreakContextType {
+export interface BrakeContextType {
   collision: Collision;
 }
 
 export enum Collision {
-  NONE = 0,
-  CPNCO,
-  CPTA,
-  CPLA,
-  ERROR = 9,
+  NONE = "",
+  CPNCO = "CPNCO",
+  CPTA = "CPTA",
+  CPLA = "CPLA",
+  ERROR = "ERROR",
 }
