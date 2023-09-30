@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import type ReconnectingWebSocket from "reconnecting-websocket";
 
 export interface SocketContextType {
@@ -37,7 +38,7 @@ export interface Vector2D {
 
 export interface RequestModifierType extends RequestType {
   timestamp: number;
-  setTimestamp: any;
+  setTimestamp: Dispatch<SetStateAction<number>>;
 }
 
 export interface ConnectionType {
