@@ -39,13 +39,13 @@ Your task for the upcoming 24 hours will include implementing a solution for veh
 ```
 2. **Connection request**: The client sends a connection request, to which the server responds with the properties of the data set.
 ```tsx
-    const webSocket = new ReconnectingWebSocket("ws://localhost:8765");
+const webSocket = new ReconnectingWebSocket("ws://localhost:8765");
 
-    webSocket.onopen = () => {
-      const connectionRequest = { type: "connection" } as RequestType;
-      const connectionString = JSON.stringify(connectionRequest);
-      webSocket.send(connectionString);
-    };
+webSocket.onopen = () => {
+  const connectionRequest = { type: "connection" } as RequestType;
+  const connectionString = JSON.stringify(connectionRequest);
+  webSocket.send(connectionString);
+};
 ```
 3. **Data request**: Every time the slider on the website changes, a data request is sent to the server, to which the server responds with the timestamped data.
 ```tsx
