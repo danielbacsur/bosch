@@ -1,5 +1,5 @@
-import { ObjectData, SocketContextType } from "@/lib/types";
-import { Vector3 } from "three";
+import { ObjectData, SocketContextType, Vector2D } from "@/lib/types";
+import { Vector2, Vector3 } from "three";
 
 export function distanceVector(v1: Vector3, v2: Vector3) {
   var dx = v1.x - v2.x;
@@ -22,4 +22,8 @@ export const validate = (socket: SocketContextType, object: ObjectData) => {
 
 export function getBreakDistance(speed?: number) {
   return 10;
+}
+
+export function convert (vec: Vector2D) {
+  return new Vector3(vec.x, 0, vec.y)
 }
