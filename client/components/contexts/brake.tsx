@@ -60,10 +60,6 @@ export const BrakeProvider = ({ children }: { children: ReactNode }) => {
     return Collision.ERROR;
   }, [socket]);
 
-  useEffect(() => {
-    console.log(collision);
-  }, [collision]);
-
   return (
     <BrakeContext.Provider value={{ collision }}>
       {children}
