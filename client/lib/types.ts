@@ -22,6 +22,7 @@ export interface Vehicle {
   yaw: number;
   speed: number;
   rotation: number;
+  position: Vector2D;
 }
 
 export interface ObjectData {
