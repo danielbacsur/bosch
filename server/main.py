@@ -39,18 +39,17 @@ def toRad(degrees):
 
 
 sorted = sorted(structured.keys())
-previous_timestamp = sorted[0]
-
+previous = sorted[0]
 totalRotation = 0
 
 for current in sorted:
-    deltatime = current - previous_timestamp
+    deltatime = current - previous
     structured[current]["deltatime"] = deltatime
-    
+
     totalRotation += deltatime * structured[current]["vehicle"]["yaw"]
     structured[current]["vehicle"]["rotation"] = totalRotation
 
-    previous_timestamp = current
+    previous = current
 
 # Calculate the delta time of the database, and get some helper variables
 minkey = min(structured.keys())
