@@ -93,7 +93,3 @@ export const SocketProvider = ({ children }: { children: ReactNode }) => {
     </SocketContext.Provider>
   );
 };
-
-const connectionRequest = JSON.stringify({
-  type: "connection",
-} as RequestType);
