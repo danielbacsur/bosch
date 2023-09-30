@@ -59,6 +59,11 @@ function Overlay() {
             just press ME
           </button>
           .
+          <br />
+          <br />
+          feel free to navigate around,
+          <br />
+          while the simulation is playing
         </div>
         <div className="absolute top-[5vw] right-[5vw]">
           odyssey by{" "}
