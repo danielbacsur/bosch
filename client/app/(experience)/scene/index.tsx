@@ -3,6 +3,7 @@
 import { useSocket } from "@/components/contexts/socket";
 import { Canvas } from "@react-three/fiber";
 import { ObjectData, SocketContextType } from "@/lib/types";
+import { validate } from "@/lib/helpers/three";
 import Porsche from "./porsche";
 import {
   AccumulativeShadows,
@@ -14,7 +15,6 @@ import {
   Line,
   Grid,
 } from "@react-three/drei";
-import { validate } from "@/lib/helpers/three";
 
 export default function Scene() {
   return (
@@ -104,7 +104,13 @@ const Objects = () => {
   );
 };
 
-const Object = ({ socket, object }: { socket:SocketContextType, object: ObjectData }) => {
+const Object = ({
+  socket,
+  object,
+}: {
+  socket: SocketContextType;
+  object: ObjectData;
+}) => {
   return (
     <>
       <Line
