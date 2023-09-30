@@ -88,10 +88,14 @@ const Lights = () => {
 };
 
 const Vehicle = () => {
+  const socket = useSocket()
   return (
+    <>
     <Center top>
       <Porsche />
     </Center>
+    <arrowHelper scale={socket?.response.vehicle.speed} position={[0, 1.25, 0]} rotation={[ Math.PI / 2,0, -socket?.response.vehicle.yaw!]}/>
+    </>
   );
 };
 
