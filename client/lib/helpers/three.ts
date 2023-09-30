@@ -19,3 +19,7 @@ export const validate = (socket: SocketContextType, object: ObjectData) => {
 
   return inDanger && isValid;
 };
+
+export function getBreakDistance(speed?: number) {
+  return 10;
+}
